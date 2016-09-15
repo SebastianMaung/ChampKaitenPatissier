@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Kaiten Patissier
+Comment=Puzzle Game
+Exec=RotateGear
+Icon=icon
+Terminal=false
+Categories=games;
