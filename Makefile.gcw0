@@ -1,10 +1,17 @@
 CC = gcc
 CXX = g++
+#compiled on a Pi 4, 32 bit in shauninman/union-miyoomini-toolchain/tree/90ce1ec3c3560aac63003942511054d4aab33728
 RM = rm -f
 
-CFLAGS = -Wall -O2 `sdl-config --cflags` -Igfx
+CFLAGS = -Wall -O2 `sdl-config --cflags` -Igfx -I/opt/miyoomini-toolchain/arm-linux-gnueabihf/libc/usr/include/SDL
 CXXFLAGS = $(CFLAGS)
-LDFLAGS = `sdl-config --libs` -lSDL_mixer
+#LDFLAGS = `sdl-config --libs` -lSDL_mixer -L/opt/miyoomini-toolchain/arm-linux-gnueabihf/libc/usr/lib -L/opt/miyoomini-toolchain/arm-linux-gnueabihf/libc/usr/lib -L/opt/miyoomini-toolchain/arm-linux-gnueabihf/libc/usr/lib -L/opt/miyoomini-toolchain/arm-linux-gnueabihf/libc/usr/lib/
+
+
+#used shauninman/SDL-1.2/tree/c57a554b48f5b7830595a9dde7c1d1a25fe103b3   
+LDFLAGS = `sdl-config --libs` -lSDL_mixer -L/opt/miyoomini-toolchain/arm-linux-gnueabihf/libc/usr/lib -lvorbisfile -lvorbis -logg -lmad
+
+
 
 OBJS = ram.o util_snd.o function.o dconv.o scene.o title.o init.o act.o option.o ending.o logo.o demo.o stageselect.o ./gfx/SDL_rotozoom.o
 
@@ -13,7 +20,7 @@ SOURCES = $(patsubst %.o, %.c, $(OBJS))
 all: RotateGear
 
 RotateGear: $(OBJS)
-	$(CXX) -o $@ $(OBJS) $(LDFLAGS)
-	
+        $(CXX) -o $@ $(OBJS) $(LDFLAGS)
+
 clean:
-	rm *.o
+        rm *.o
