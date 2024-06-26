@@ -1,8 +1,8 @@
-CC = mipsel-linux-gcc
-CXX = mipsel-linux-g++
+CC = gcc
+CXX = g++
 RM = rm -f
 
-CFLAGS = -Wall -O2 -mips32r2 `sdl-config --cflags` -Igfx -DHOME_PATH
+CFLAGS = -Wall -O2  `sdl-config --cflags` -Igfx -DHOME_PATH -I/opt/miyoomini-toolchain/arm-linux-gnueabihf/libc/usr/include/SDL
 CXXFLAGS = $(CFLAGS)
 LDFLAGS = -lSDL -lSDL_mixer -lm
 
@@ -13,7 +13,7 @@ SOURCES = $(patsubst %.o, %.c, $(OBJS))
 all: RotateGear
 
 RotateGear: $(OBJS)
-	$(CXX) -o $@ $(OBJS) $(LDFLAGS)
-	
+        $(CXX) -o $@ $(OBJS) $(LDFLAGS)
+
 clean:
-	rm *.o ./gfx/*.o
+        rm *.o ./gfx/*.o
