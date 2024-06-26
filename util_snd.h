@@ -5,29 +5,43 @@ enum{
 	SOUND_MUSBANK = 32,
 	SOUND_CHUNKBANK = 32,
 	SOUND_MIXBANK = 8
-//	SOUND_MIXBANK = 32
 };
 
-extern void soundInitBuffer(void);
-extern void soundRelease(void);
-extern void soundLoadBuffer(Sint32 num, Uint8 *fname, int loop);
-extern void soundLoadBuffer2(Sint32 num, Uint8 *fname1, Uint8 *fname2);
-extern void soundLoadBufferSE(Sint32 num, Uint8 *fname);
-extern void soundStopBgm(Sint32 num);
-extern void soundStopBgmPlaying(void);
-extern int soundIsPlayBgm(void);
-extern void soundPlayBgm(Sint32 num);
-extern void soundPlayFadeFlag(Sint32 flag, Sint32 time);
-extern void soundPlayCtrl(void);
-extern void soundSetVolumeMaster(Sint32 vol);
-extern void soundSetVolumeBgm(Sint32 vol, Sint32 num);
-extern void soundSetVolumeAll(Sint32 vol);
-extern void soundSetVolumeMasterBgm(int vol);
-extern void soundStopSe(Sint32 num);
-extern void soundPlaySe(Sint32 num);
-extern int soundIsPlaySe(Sint32 num);
-extern void soundStopSeAll(void);
+enum {
+	BGM_GAME01 = 0,
 
-extern Sint32 sound_buff[];
+	SE_SEL = 0,
+	SE_COLLECT,
+	SE_SHOT,
+	SE_SHIPBRK,
+	SE_CHIP,
+	SE_DMG,
+	SE_ENEEXP,
+	SE_ENEBRK,
+	SE_EXTEND,
+	SE_ALERT,
+};
+
+void soundInitBuffer(void);
+void soundRelease(void);
+void soundLoadBuffer(int num, UINT8 *fname, int loop);
+void soundLoadBuffer2(int num, UINT8 *fname1, UINT8 *fname2);
+void soundLoadBufferSE(int num, UINT8 *fname);
+void soundStopBgm(int num);
+void soundStopBgmPlaying(void);
+int soundIsPlayBgm(void);
+void soundPlayBgm(int num);
+void soundPlayFadeFlag(int flag, int time);
+void soundPlayCtrl(void);
+void soundSetVolumeMaster(int vol);
+void soundSetVolumeBgm(int vol, int num);
+void soundSetVolumeAll(int vol);
+void soundSetVolumeMasterBgm(int vol);
+void soundStopSe(int num);
+void soundPlaySe(int num);
+int soundIsPlaySe(int num);
+void soundStopSeAll(void);
+
+extern SINT sound_buff[];
 
 #endif /* _UTIL_SND_ */
