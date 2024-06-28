@@ -2,16 +2,17 @@ CC = gcc
 CXX = g++
 RM = rm -f
 
-CFLAGS = -Wall -O2 `sdl-config --cflags` -Igfx -DHOME_PATH -I/lib/arm-linux-gnueabihf/ -I/opt/miyoomini-toolchain/arm-linux-gnueabihf/libc/usr/include/SDL/
+CFLAGS = -Wall -O2 `/opt/miyoomini-toolchain/arm-linux-gnueabihf/libc/usr/bin/sdl-config --cflags` -DHOME_PATH -I/lib/arm-linux-gnueabihf/ -I/opt/miyoomini-toolchain/arm-linux-gnueabihf/libc/usr/include -L.
 CXXFLAGS = $(CFLAGS)
 LDFLAGS = -Wl,--start-group \
-          ./libSDL-1.2.so.0 \
+          -L. \
+          -lSDL \
+          -lSDL_mixer \
           /lib/arm-linux-gnueabihf/libpthread.so.0 \
-          ./libSDL_mixer-1.2.so.0 \
-          ./libvorbisfile.so.3 \
-          ./libvorbis.so.0 \
-          ./libogg.so.0 \
-          ./libmad.so.0 \
+          -L/opt/miyoomini-toolchain/arm-linux-gnueabihf/libc/usr/include/SDL/ \
+#          -L/root/workspace/SDL-1.2/build/.libs/ \
+          -L/usr/local/lib \
+          #./libSDL_mixer-1.2.so.0 \
           /usr/lib/arm-linux-gnueabihf/libstdc++.so.6 \
           /lib/arm-linux-gnueabihf/libm.so.6 \
           /lib/arm-linux-gnueabihf/libgcc_s.so.1 \
@@ -19,6 +20,8 @@ LDFLAGS = -Wl,--start-group \
           /lib/arm-linux-gnueabihf/libdl.so.2 \
           /lib/ld-linux-armhf.so.3 \
           -Wl,--end-group
+ #         -lMI_sys \
+#          -lMI_gfx
 
 OBJS = ram.o util_snd.o function.o dconv.o scene.o title.o init.o act.o option.o ending.o logo.o demo.o stageselect.o ./gfx/SDL_rotozoom.o
 
@@ -30,4 +33,4 @@ RotateGear: $(OBJS)
         $(CXX) -o $@ $(OBJS) $(LDFLAGS)
 
 clean:
-        rm -f *.o ./gfx/*.o RotateGear
+        $(RM) *.o ./gfx/*.o RotateGear
